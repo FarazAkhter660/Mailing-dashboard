@@ -1,55 +1,81 @@
-import React from "react";
-import { useAuth } from "../contexts/AuthContext";
+import React, { useState } from "react";
 import MailList from "../components/MailList";
-import MailDetail from "../components/MailDetail";
 
 const mockEmails = [
   {
     subject: "Welcome to the Mailing Dashboard",
     sender: "admin@example.com",
     timestamp: "2024-12-25 10:30 AM",
+    isUnread: true,
   },
   {
     subject: "New Updates Available",
     sender: "updates@example.com",
     timestamp: "2024-12-24 9:00 AM",
+    isUnread: false,
+  },
+  {
+    subject: "Meeting Reminder",
+    sender: "team@example.com",
+    timestamp: "2024-12-23 5:00 PM",
+    isUnread: true,
   },
 ];
 
 const Dashboard = () => {
-  const { user } = useAuth();
+  const [activeTab, setActiveTab] = useState("All Mails");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  if (!user) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <p className="text-xl text-gray-700">Please log in to view your dashboard.</p>
-      </div>
-    );
-  }
+  // Filter emails based on the active tab and search term
+  const filteredEmails = mockEmails.filter((email) => {
+    const matchesSearch =
+      email.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      email.sender.toLowerCase().includes(searchTerm.toLowerCase());
+    if (activeTab === "Unread") {
+      return email.isUnread && matchesSearch;
+    }
+    return matchesSearch;
+  });
 
   return (
-    <div className="flex min-h-screen">
-      <div className="w-64 bg-gray-800 text-white p-4">
-        <h2 className="text-lg font-bold">Mail Folders</h2>
-        <ul className="mt-4 space-y-2">
-          <li className="hover:bg-gray-700 p-2 rounded">Inbox</li>
-          <li className="hover:bg-gray-700 p-2 rounded">Sent</li>
-          <li className="hover:bg-gray-700 p-2 rounded">Drafts</li>
-          <li className="hover:bg-gray-700 p-2 rounded">Trash</li>
-        </ul>
+    <div className="flex-1 p-4 bg-gray-100">
+      {/* Tabs for All Mails and Unread */}
+      <div className="flex space-x-4 mb-4">
+        <button
+          className={`px-4 py-2 rounded ${
+            activeTab === "All Mails"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-300 text-black"
+          }`}
+          onClick={() => setActiveTab("All Mails")}
+        >
+          All Mails
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${
+            activeTab === "Unread"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-300 text-black"
+          }`}
+          onClick={() => setActiveTab("Unread")}
+        >
+          Unread
+        </button>
       </div>
 
-      <div className="flex-1 p-4">
-        <h1 className="text-2xl font-bold mb-4">Welcome, {user.name}</h1>
-        <div className="grid grid-cols-3 gap-4">
-          <div className="col-span-1">
-            <MailList emails={mockEmails} />
-          </div>
-          <div className="col-span-2">
-            <MailDetail />
-          </div>
-        </div>
+      {/* Search Bar */}
+      <div className="mb-4">
+        <input
+          type="text"
+          placeholder="Search emails..."
+          className="w-full p-2 border border-gray-300 rounded"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
+
+      {/* Mail List */}
+      <MailList emails={filteredEmails} />
     </div>
   );
 };

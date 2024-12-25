@@ -4,7 +4,10 @@ const LoginForm = ({ onSubmit }) => {
   const { register, handleSubmit } = useForm();
 
   return (
-    <form className="p-4 bg-gray-800 text-white rounded-lg" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="p-4 bg-gray-800 text-white rounded-lg"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className="mb-4">
         <label className="block text-sm mb-2">Email</label>
         <input
@@ -23,7 +26,9 @@ const LoginForm = ({ onSubmit }) => {
           required
         />
       </div>
-      <button type="submit" className="w-full py-2 bg-blue-600 rounded-lg">Login</button>
+      <button type="submit" className="w-full py-2 bg-blue-600 rounded-lg">
+        Login
+      </button>
     </form>
   );
 };
