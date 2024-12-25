@@ -1,21 +1,22 @@
-const MailList = ({ emails, onSelectEmail }) => {
-    return (
-      <div className="flex-1 bg-gray-900 text-white p-4 overflow-y-auto">
-        <h2 className="text-xl font-bold mb-4">Inbox</h2>
-        {emails.map((email, index) => (
-          <div
-            key={index}
-            className="p-4 mb-2 rounded-lg bg-gray-800 hover:bg-gray-700 cursor-pointer"
-            onClick={() => onSelectEmail(email)}
-          >
-            <h3 className="text-lg font-semibold">{email.subject}</h3>
-            <p className="text-sm text-gray-400">{email.sender}</p>
-            <p className="text-sm text-gray-500">{email.preview}</p>
-          </div>
-        ))}
-      </div>
-    );
-  };
-  
-  export default MailList;
-  
+import React from "react";
+
+const MailList = ({ emails = [] }) => {
+  // Handle the case where emails is undefined or empty
+  if (emails.length === 0) {
+    return <div className="text-gray-500">No emails to display</div>;
+  }
+
+  return (
+    <ul className="divide-y divide-gray-300">
+      {emails.map((email, index) => (
+        <li key={index} className="p-4 hover:bg-gray-100">
+          <h3 className="font-bold">{email.subject}</h3>
+          <p className="text-sm text-gray-600">{email.sender}</p>
+          <p className="text-xs text-gray-400">{email.timestamp}</p>
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default MailList;

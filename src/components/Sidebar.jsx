@@ -1,11 +1,21 @@
-import { AiOutlineInbox, AiOutlineSend, AiOutlineDelete, AiOutlineFolder, AiOutlineArchive } from "react-icons/ai";
+import {
+  AiOutlineInbox,
+  AiOutlineSend,
+  AiOutlineDelete,
+  AiOutlineFolder,
+} from "react-icons/ai";
+import { AiOutlineMail } from "react-icons/ai"; // Example for Ant Design icons
+import { BiArchive } from "react-icons/bi"; // From BoxIcons
+import { MdArchive } from "react-icons/md"; // From Material Icons
+
+
 
 const Sidebar = () => {
   const menuItems = [
     { name: "Inbox", icon: <AiOutlineInbox />, count: 128 },
     { name: "Sent", icon: <AiOutlineSend />, count: 9 },
     { name: "Trash", icon: <AiOutlineDelete />, count: 23 },
-    { name: "Archive", icon: <AiOutlineArchive />, count: 8 },
+    { name: "Archive", icon: <BiArchive />, count: 8 },
   ];
 
   return (
