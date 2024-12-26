@@ -5,10 +5,10 @@ import {
   AiOutlineDelete,
   AiOutlineFileText,
   AiOutlineShop,
-} from "react-icons/ai"; // General icons
-import { BiArchive } from "react-icons/bi"; // BoxIcons
-import { MdOutlineSocialDistance } from "react-icons/md"; // Material Icons
-import { RiSpamLine, RiNotification2Line, RiDiscussLine } from "react-icons/ri"; // Remix Icons
+} from "react-icons/ai";
+import { BiArchive } from "react-icons/bi";
+import { MdOutlineSocialDistance } from "react-icons/md";
+import { RiSpamLine, RiNotification2Line, RiDiscussLine } from "react-icons/ri";
 
 const Sidebar = () => {
   const menuItems = [

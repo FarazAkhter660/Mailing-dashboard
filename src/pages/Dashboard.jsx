@@ -128,6 +128,7 @@ const mockEmails = [
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("All Mails");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedEmail, setSelectedEmail] = useState(null); // New state for selected email
 
   // Filter emails based on the active tab and search term
   const filteredEmails = mockEmails.filter((email) => {
@@ -140,6 +141,16 @@ const Dashboard = () => {
     return matchesSearch;
   });
 
+  // Handler to open an email
+  const openEmail = (email) => {
+    setSelectedEmail(email);
+  };
+
+  // Handler to go back to the dashboard
+  const goBack = () => {
+    setSelectedEmail(null);
+  };
+
   return (
     <div className="flex min-h-screen bg-black text-white flex-1 ml-64 p-4">
       {/* Sidebar */}
@@ -147,50 +158,78 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-6 bg-black text-white">
-        {/* Tabs for All Mails and Unread */}
-        <div className="flex space-x-4 mb-6">
-          <button
-            className={`px-6 py-2 font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === "All Mails"
-                ? "bg-blue-600 text-white shadow-md"
-                : "bg-gray-300 text-black hover:bg-gray-400"
-            }`}
-            onClick={() => setActiveTab("All Mails")}
-          >
-            All Mails
-          </button>
-          <button
-            className={`px-6 py-2 font-semibold rounded-lg transition-all duration-200 ${
-              activeTab === "Unread"
-                ? "bg-blue-600 text-white shadow-md"
-                : "bg-gray-300 text-black hover:bg-gray-400"
-            }`}
-            onClick={() => setActiveTab("Unread")}
-          >
-            Unread
-          </button>
-        </div>
-
-        {/* Search Bar */}
-        <div className="relative mb-6">
-          <input
-            type="text"
-            placeholder="Search emails..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <span className="absolute inset-y-0 right-4 flex items-center text-gray-400">
-            🔍
-          </span>
-        </div>
-
-        {/* Mail List */}
-        {filteredEmails.length > 0 ? (
-          <MailList emails={filteredEmails} />
+        {selectedEmail ? (
+          // Email Details View
+          <div>
+            <button
+              onClick={goBack}
+              className="px-4 py-2 bg-gray-700 text-white rounded-lg mb-4 hover:bg-gray-600"
+            >
+              ← Back
+            </button>
+            <div className="p-6 bg-gray-800 rounded-lg">
+              <h2 className="text-xl font-semibold mb-4">{selectedEmail.subject}</h2>
+              <div className="text-sm text-gray-400 mb-2">
+                <strong>From:</strong> {selectedEmail.sender}
+              </div>
+              <div className="text-sm text-gray-400 mb-2">
+                <strong>Received:</strong> {selectedEmail.timestamp}
+              </div>
+              <p className="text-gray-300">Email content goes here...</p>
+            </div>
+          </div>
         ) : (
-          <div className="text-center text-gray-500">
-            No emails found for the selected filter.
+          // Dashboard View
+          <div>
+            {/* Tabs for All Mails and Unread */}
+            <div className="flex space-x-4 mb-6">
+              <button
+                className={`px-6 py-2 font-semibold rounded-lg transition-all duration-200 ${
+                  activeTab === "All Mails"
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-gray-300 text-black hover:bg-gray-400"
+                }`}
+                onClick={() => setActiveTab("All Mails")}
+              >
+                All Mails
+              </button>
+              <button
+                className={`px-6 py-2 font-semibold rounded-lg transition-all duration-200 ${
+                  activeTab === "Unread"
+                    ? "bg-blue-600 text-white shadow-md"
+                    : "bg-gray-300 text-black hover:bg-gray-400"
+                }`}
+                onClick={() => setActiveTab("Unread")}
+              >
+                Unread
+              </button>
+            </div>
+
+            {/* Search Bar */}
+            <div className="relative mb-6">
+              <input
+                type="text"
+                placeholder="Search emails..."
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <span className="absolute inset-y-0 right-4 flex items-center text-gray-400">
+                🔍
+              </span>
+            </div>
+
+            {/* Mail List */}
+            {filteredEmails.length > 0 ? (
+              <MailList
+                emails={filteredEmails}
+                onEmailClick={openEmail} // Pass the openEmail function to MailList
+              />
+            ) : (
+              <div className="text-center text-gray-500">
+                No emails found for the selected filter.
+              </div>
+            )}
           </div>
         )}
       </div>

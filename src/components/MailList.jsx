@@ -1,12 +1,13 @@
 import React from "react";
 
-const MailList = ({ emails }) => {
+const MailList = ({ emails,onEmailClick }) => {
   return (
     <div className="space-y-4">
       {emails.map((email, index) => (
         <div
           key={index}
           className="p-4 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-200 cursor-pointer"
+          onClick={() => onEmailClick(email)}
         >
           <div className="flex justify-between">
             <span className="font-semibold">{email.subject}</span>
