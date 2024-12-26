@@ -26,7 +26,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="w-64 h-screen bg-gray-900 text-white p-4 fixed top-0 left-0">
+    <div className="w-64 h-screen bg-black text-white p-4 fixed top-0 left-0">
       <h1 className="text-lg font-bold mb-6">Mail App</h1>
       <ul className="space-y-4">
         {menuItems.map((item, index) => (
@@ -44,5 +44,6 @@ const Sidebar = () => {
     </div>
   );
 };
+
 
 export default Sidebar;

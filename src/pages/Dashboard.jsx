@@ -141,12 +141,12 @@ const Dashboard = () => {
   });
 
   return (
-    <div className="flex min-h-screen bg-gray-900 text-white flex-1 ml-64 p-4 bg-gray-100">
+    <div className="flex min-h-screen bg-black text-white flex-1 ml-64 p-4">
       {/* Sidebar */}
       <Sidebar />
 
       {/* Main Content */}
-      <div className="flex-1 p-6 bg-gray-100 text-black">
+      <div className="flex-1 p-6 bg-black text-white">
         {/* Tabs for All Mails and Unread */}
         <div className="flex space-x-4 mb-6">
           <button
@@ -197,5 +197,6 @@ const Dashboard = () => {
     </div>
   );
 };
+
 
 export default Dashboard;
