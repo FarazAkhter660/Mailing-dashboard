@@ -176,7 +176,7 @@ const Dashboard = () => {
           <input
             type="text"
             placeholder="Search emails..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -197,6 +197,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
-
 export default Dashboard;

@@ -2,20 +2,20 @@ import React from "react";
 
 const MailList = ({ emails }) => {
   return (
-    <div>
+    <div className="space-y-4">
       {emails.map((email, index) => (
         <div
           key={index}
-          className="flex items-center justify-between p-4 mb-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:bg-gray-100 cursor-pointer"
+          className="p-4 bg-black text-white rounded-lg hover:bg-gray-800 transition-all duration-200 cursor-pointer"
         >
-          {/* Sender Info */}
-          <div>
-            <p className="font-semibold text-gray-800">{email.sender}</p>
-            <p className="text-gray-500">{email.subject}</p>
+          <div className="flex justify-between">
+            <span className="font-semibold">{email.subject}</span>
+            <span className="text-sm text-gray-400">{email.timestamp}</span>
           </div>
-
-          {/* Timestamp */}
-          <div className="text-sm text-gray-400">{email.timestamp}</div>
+          <div className="text-sm text-gray-500">{email.sender}</div>
+          {email.isUnread && (
+            <span className="text-blue-500 text-xs">Unread</span>
+          )}
         </div>
       ))}
     </div>
