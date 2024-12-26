@@ -1,18 +1,24 @@
-const MailList = ({ emails }) => {
-  if (emails.length === 0) {
-    return <p className="text-gray-500">No emails to display.</p>;
-  }
+import React from "react";
 
+const MailList = ({ emails }) => {
   return (
-    <ul className="space-y-4">
+    <div>
       {emails.map((email, index) => (
-        <li key={index} className="p-4 border border-gray-300 rounded shadow">
-          <h3 className="font-bold text-lg">{email.subject}</h3>
-          <p className="text-gray-600">{email.sender}</p>
-          <p className="text-gray-400 text-sm">{email.timestamp}</p>
-        </li>
+        <div
+          key={index}
+          className="flex items-center justify-between p-4 mb-2 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 hover:bg-gray-100 cursor-pointer"
+        >
+          {/* Sender Info */}
+          <div>
+            <p className="font-semibold text-gray-800">{email.sender}</p>
+            <p className="text-gray-500">{email.subject}</p>
+          </div>
+
+          {/* Timestamp */}
+          <div className="text-sm text-gray-400">{email.timestamp}</div>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
