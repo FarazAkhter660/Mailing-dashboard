@@ -1,6 +1,6 @@
 import React from "react";
 
-const MailList = ({ emails,onEmailClick }) => {
+const MailList = ({ emails, onEmailClick }) => {
   return (
     <div className="space-y-4">
       {emails.map((email, index) => (
