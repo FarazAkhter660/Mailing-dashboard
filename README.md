@@ -38,7 +38,7 @@ This project is a mailing dashboard built using **React.js** with features such 
 ## Deployed Link  
 
 You can access the live application here:  
-[Mailing Dashboard - Live](https://mailing-dashboard-qsqcms71a-farazakhter660s-projects.vercel.app/)  
+[Mailing Dashboard - Live](https://mailing-dashboard-sepia.vercel.app/)  
 
 ---
 
