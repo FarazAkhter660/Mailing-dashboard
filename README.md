@@ -1,7 +1,3 @@
-Here's the updated documentation with a deployed link and a section for project pictures:  
-
----
-
 # Mailing Dashboard Application  
 
 This project is a mailing dashboard built using **React.js** with features such as email listing, filtering, search, and navigation between login and the dashboard.  
