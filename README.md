@@ -53,7 +53,6 @@ You can access the live application here:
 ### **Dashboard - Email Viewer:**  
 ![Email Viewer]
 ![alt text](image-2.png)
-_Replace the placeholders with actual screenshots of your project._
 
 ---
 
