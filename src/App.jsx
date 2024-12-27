@@ -1,13 +1,16 @@
 import React from "react";
-import AppRouter from "./router"; // Import the router
-import { AuthProvider } from "./contexts/AuthContext"; // Wrap app with AuthContext
-import "./styles/globals.css"; // Include Tailwind styles
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   return (
-    <AuthProvider>
-      <AppRouter />
-    </AuthProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 };
 
