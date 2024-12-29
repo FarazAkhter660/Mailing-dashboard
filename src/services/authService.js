@@ -1,4 +1,4 @@
-const API_URL = "https://your-backend-api.com/api"; // Replace with your backend URL
+const API_URL = "https://api.com/api";
 
 export const login = async (email, password) => {
   const response = await fetch(`${API_URL}/login`, {
