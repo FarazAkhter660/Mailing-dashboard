@@ -4,6 +4,7 @@ import MailList from "../components/MailList";
 
 const mockEmails = [
   {
+    id: 1,
     subject: "Welcome to the Mailing Dashboard",
     sender: "admin@example.com",
     timestamp: "2024-12-25 10:30 AM",
@@ -20,6 +21,7 @@ Please find the allotment cum unblocking details as given below:
 Thank you for investing with us.`,
   },
   {
+    id: 2,
     subject: "New Updates Available",
     sender: "updates@example.com",
     timestamp: "2024-12-24 9:00 AM",
@@ -33,144 +35,112 @@ We are excited to announce new updates in our dashboard. Here's what's new:
 Check it out now!`,
   },
   {
-    subject: "Meeting Reminder",
-    sender: "team@example.com",
-    timestamp: "2024-12-23 5:00 PM",
-    isUnread: true,
-    content: `Hi Team,
-
-This is a reminder for our project kickoff meeting scheduled for tomorrow:
-- Date: 2024-12-24
-- Time: 10:00 AM
-- Location: Conference Room 1
-
-Looking forward to seeing you all there.`,
-  },
-  {
-    subject: "Invoice for December",
+    id: 3,
+    subject: "Invoice for December 2024",
     sender: "billing@example.com",
-    timestamp: "2024-12-22 3:15 PM",
-    isUnread: false,
+    timestamp: "2024-12-23 3:15 PM",
+    isUnread: true,
     content: `Dear Customer,
 
-Please find attached your invoice for December 2024.
-- Total Amount: ₹5,000
-- Due Date: 2024-12-31
+Your invoice for December 2024 is now available. 
+Invoice Amount: ₹5,000
+Due Date: 2024-12-31
 
-If you have any questions, feel free to contact us at billing@example.com.`,
+Please make the payment to avoid late fees.
+
+Thank you for your business!`,
   },
   {
-    subject: "Your Subscription is Expiring Soon",
-    sender: "support@example.com",
-    timestamp: "2024-12-21 11:00 AM",
-    isUnread: true,
-    content: `Hi,
-
-We noticed that your subscription is set to expire on 2024-12-31. 
-
-Renew now to continue enjoying our premium features without interruption.
-
-[Renew Now]`,
-  },
-  {
+    id: 4,
     subject: "Happy Holidays!",
-    sender: "friends@example.com",
-    timestamp: "2024-12-20 6:30 PM",
+    sender: "team@example.com",
+    timestamp: "2024-12-22 12:00 PM",
     isUnread: false,
-    content: `Dear Friend,
+    content: `Season's Greetings!
 
-Wishing you and your family a joyous holiday season and a happy new year!
+We wish you and your family a joyous holiday season and a prosperous new year. Thank you for being with us this year.
 
-Best regards,
+Best regards,  
 The Team`,
   },
   {
-    subject: "Security Alert: Unusual Login Attempt",
+    id: 5,
+    subject: "Security Alert: Suspicious Login Attempt",
     sender: "security@example.com",
-    timestamp: "2024-12-18 8:00 PM",
+    timestamp: "2024-12-21 5:45 AM",
     isUnread: true,
     content: `Dear User,
 
-We detected an unusual login attempt on your account:
-- Date: 2024-12-18
-- IP Address: 192.168.1.1
-- Location: New York, USA
+We detected a suspicious login attempt to your account.  
+Location: Unknown  
+Device: Windows 10  
 
-If this wasn't you, please reset your password immediately.`,
+If this was you, no further action is required. Otherwise, please reset your password immediately.
+
+Stay safe!  
+Security Team`,
   },
   {
-    subject: "Job Application Status",
-    sender: "hr@example.com",
-    timestamp: "2024-12-17 4:20 PM",
+    id: 6,
+    subject: "Reminder: Meeting Tomorrow",
+    sender: "colleague@example.com",
+    timestamp: "2024-12-20 4:00 PM",
     isUnread: false,
-    content: `Dear Applicant,
-
-Thank you for applying to the Software Engineer position. 
-
-We are pleased to inform you that you have been shortlisted for the next round. Our HR team will reach out to you with further details.
-
-Best regards,
-HR Team`,
-  },
-  {
-    subject: "Special Offer: 50% Off Your Next Purchase",
-    sender: "sales@example.com",
-    timestamp: "2024-12-16 2:00 PM",
-    isUnread: true,
-    content: `Hello,
-
-Don't miss out on our exclusive offer! Get 50% off your next purchase.
-
-Use code: HALFPRICE
-Offer valid until: 2024-12-31`,
-  },
-  {
-    subject: "Monthly Performance Report",
-    sender: "analytics@example.com",
-    timestamp: "2024-12-14 1:00 PM",
-    isUnread: true,
     content: `Hi,
 
-Your performance report for December is now available. Here's a summary:
-- Total Hours Worked: 160
-- Tasks Completed: 45
-- Performance Rating: 4.8/5
+Just a quick reminder about our meeting scheduled for tomorrow:  
+- Time: 10:00 AM  
+- Topic: Project Roadmap  
 
-Visit your dashboard for detailed insights.`,
+Let me know if you need any preparation materials.
+
+Cheers,  
+John`,
   },
   {
-    subject: "Upcoming Webinar Invitation",
-    sender: "events@example.com",
-    timestamp: "2024-12-12 11:45 AM",
-    isUnread: false,
-    content: `Dear Participant,
-
-We are excited to invite you to our upcoming webinar on "The Future of Tech."
-- Date: 2024-12-30
-- Time: 4:00 PM
-- Platform: Zoom
-
-Register here: [Webinar Link]`,
-  },
-  {
-    subject: "Survey: Share Your Feedback",
-    sender: "survey@example.com",
-    timestamp: "2024-12-10 5:10 PM",
+    id: 7,
+    subject: "Your Weekly Newsletter",
+    sender: "newsletter@example.com",
+    timestamp: "2024-12-19 8:00 AM",
     isUnread: true,
     content: `Hello,
 
-Your feedback matters! Please take a moment to complete our short survey and help us improve our services.
+Here's your weekly dose of news and updates from our team.  
+- Feature Spotlight: Enhanced Analytics Dashboard  
+- Pro Tips: Making the most of our services  
 
-[Take Survey]`,
+Read more on our blog.  
+
+Best,  
+Newsletter Team`,
+  },
+  {
+    id: 8,
+    subject: "System Maintenance Notice",
+    sender: "support@example.com",
+    timestamp: "2024-12-18 7:30 PM",
+    isUnread: false,
+    content: `Dear User,
+
+We will be performing scheduled maintenance on our systems:  
+- Date: 2024-12-20  
+- Time: 1:00 AM to 5:00 AM  
+
+During this time, some services may be unavailable. We apologize for any inconvenience caused.
+
+Thank you for your understanding.  
+Support Team`,
   },
 ];
 
+
 const Dashboard = () => {
+  const [emails, setEmails] = useState(mockEmails);
   const [activeTab, setActiveTab] = useState("All Mails");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedEmail, setSelectedEmail] = useState(null);
 
-  const filteredEmails = mockEmails.filter((email) => {
+  const filteredEmails = emails.filter((email) => {
     const matchesSearch =
       email.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
       email.sender.toLowerCase().includes(searchTerm.toLowerCase());
@@ -181,6 +151,11 @@ const Dashboard = () => {
   });
 
   const openEmail = (email) => {
+    setEmails((prevEmails) =>
+      prevEmails.map((e) =>
+        e.id === email.id ? { ...e, isUnread: false } : e
+      )
+    );
     setSelectedEmail(email);
   };
 
