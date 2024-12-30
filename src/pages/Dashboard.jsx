@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import MailList from "../components/MailList";
 
@@ -133,17 +133,29 @@ Support Team`,
   },
 ];
 
-
 const Dashboard = () => {
   const [emails, setEmails] = useState(mockEmails);
   const [activeTab, setActiveTab] = useState("All Mails");
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [selectedEmail, setSelectedEmail] = useState(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchTerm.length >= 3) {
+        setDebouncedSearchTerm(searchTerm);
+      } else if (searchTerm === "") {
+        setDebouncedSearchTerm("");
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   const filteredEmails = emails.filter((email) => {
     const matchesSearch =
-      email.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      email.sender.toLowerCase().includes(searchTerm.toLowerCase());
+      email.subject.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      email.sender.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
     if (activeTab === "Unread") {
       return email.isUnread && matchesSearch;
     }
@@ -152,9 +164,7 @@ const Dashboard = () => {
 
   const openEmail = (email) => {
     setEmails((prevEmails) =>
-      prevEmails.map((e) =>
-        e.id === email.id ? { ...e, isUnread: false } : e
-      )
+      prevEmails.map((e) => (e.id === email.id ? { ...e, isUnread: false } : e))
     );
     setSelectedEmail(email);
   };
@@ -193,7 +203,7 @@ const Dashboard = () => {
           </div>
         ) : (
           <div>
-            <div className="flex justify-center space-x-4 mb-6">
+            <div className="flex justify-left space-x-4 mb-6">
               <button
                 className={`px-8 py-3 font-medium text-lg rounded-full transition-all duration-300 ${
                   activeTab === "All Mails"
