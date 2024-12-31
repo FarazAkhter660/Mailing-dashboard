@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Sidebar from "../components/Sidebar";
 import MailList from "../components/MailList";
+import { Button } from "../components/ui/button";
 
 const mockEmails = [
   {
@@ -166,26 +167,27 @@ const Dashboard = () => {
     if (term.length >= 3) {
       handleSearch(term);
     } else {
-      setDebouncedSearchTerm(""); // Clear debounced search if input is less than 3 characters
+      setDebouncedSearchTerm("");
     }
   };
 
   const filteredEmails = emails.filter((email) => {
     const matchesSearch =
       debouncedSearchTerm &&
-      (email.subject.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+      (email.subject
+        .toLowerCase()
+        .includes(debouncedSearchTerm.toLowerCase()) ||
         email.sender.toLowerCase().includes(debouncedSearchTerm.toLowerCase()));
+
     if (activeTab === "Unread") {
-      return email.isUnread && matchesSearch;
+      return email.isUnread && (!debouncedSearchTerm || matchesSearch);
     }
-    return matchesSearch || !debouncedSearchTerm; // Show all emails if search term is empty
+    return matchesSearch || !debouncedSearchTerm;
   });
 
   const openEmail = (email) => {
     setEmails((prevEmails) =>
-      prevEmails.map((e) =>
-        e.id === email.id ? { ...e, isUnread: false } : e
-      )
+      prevEmails.map((e) => (e.id === email.id ? { ...e, isUnread: false } : e))
     );
     setSelectedEmail(email);
   };
@@ -201,12 +203,9 @@ const Dashboard = () => {
       <div className="flex-1 p-6 bg-black text-white">
         {selectedEmail ? (
           <div>
-            <button
-              onClick={goBack}
-              className="px-4 py-2 bg-gray-700 text-white rounded-lg mb-4 hover:bg-gray-600"
-            >
+            <Button variant="secondary" onClick={goBack} className="mb-4">
               ← Back
-            </button>
+            </Button>
             <div className="p-6 bg-gray-800 rounded-lg">
               <h2 className="text-xl font-semibold mb-4">
                 {selectedEmail.subject}
@@ -224,27 +223,27 @@ const Dashboard = () => {
           </div>
         ) : (
           <div>
-            <div className="flex justify-center space-x-4 mb-6">
-              <button
-                className={`px-8 py-3 font-medium text-lg rounded-full transition-all duration-300 ${
+            <div className="flex justify-left space-x-4 mb-6">
+              <Button
+                className={`px-8 py-3 transition-all duration-300 ${
                   activeTab === "All Mails"
-                    ? "bg-gradient-to-r from bg-gray-700 to text-white shadow-lg transform scale-105"
+                    ? "bg-gradient-to-r from-gray-700 to-gray-600 text-white shadow-lg transform scale-105"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-600"
                 }`}
                 onClick={() => setActiveTab("All Mails")}
               >
-                All mail
-              </button>
-              <button
-                className={`px-8 py-3 font-medium text-lg rounded-full transition-all duration-300 ${
+                All Mail
+              </Button>
+              <Button
+                className={`px-8 py-3 transition-all duration-300 ${
                   activeTab === "Unread"
-                    ? "bg-gradient-to-r from bg-gray-700 to text-white shadow-lg transform scale-105"
+                    ? "bg-gradient-to-r from-gray-700 to-gray-600 text-white shadow-lg transform scale-105"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-600"
                 }`}
                 onClick={() => setActiveTab("Unread")}
               >
                 Unread
-              </button>
+              </Button>
             </div>
 
             <div className="relative mb-6">

@@ -8,4 +8,10 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
   }
+
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}
   
