@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Sidebar from "../components/Sidebar";
 import MailList from "../components/MailList";
 
@@ -140,31 +140,52 @@ const Dashboard = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [selectedEmail, setSelectedEmail] = useState(null);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (searchTerm.length >= 3) {
-        setDebouncedSearchTerm(searchTerm);
-      } else if (searchTerm === "") {
-        setDebouncedSearchTerm("");
-      }
-    }, 500);
+  // Debounce function
+  const debounce = (func, delay) => {
+    let debounceTimer;
+    return function (...args) {
+      const context = this;
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
 
-    return () => clearTimeout(timer);
-  }, [searchTerm]);
+  // Debounced search handler
+  const handleSearch = useCallback(
+    debounce((term) => {
+      setDebouncedSearchTerm(term);
+    }, 300),
+    []
+  );
+
+  const handleSearchInput = (e) => {
+    const term = e.target.value;
+    setSearchTerm(term);
+
+    // Trigger debounced handler
+    if (term.length >= 3) {
+      handleSearch(term);
+    } else {
+      setDebouncedSearchTerm(""); // Clear debounced search if input is less than 3 characters
+    }
+  };
 
   const filteredEmails = emails.filter((email) => {
     const matchesSearch =
-      email.subject.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
-      email.sender.toLowerCase().includes(debouncedSearchTerm.toLowerCase());
+      debouncedSearchTerm &&
+      (email.subject.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+        email.sender.toLowerCase().includes(debouncedSearchTerm.toLowerCase()));
     if (activeTab === "Unread") {
       return email.isUnread && matchesSearch;
     }
-    return matchesSearch;
+    return matchesSearch || !debouncedSearchTerm; // Show all emails if search term is empty
   });
 
   const openEmail = (email) => {
     setEmails((prevEmails) =>
-      prevEmails.map((e) => (e.id === email.id ? { ...e, isUnread: false } : e))
+      prevEmails.map((e) =>
+        e.id === email.id ? { ...e, isUnread: false } : e
+      )
     );
     setSelectedEmail(email);
   };
@@ -203,7 +224,7 @@ const Dashboard = () => {
           </div>
         ) : (
           <div>
-            <div className="flex justify-left space-x-4 mb-6">
+            <div className="flex justify-center space-x-4 mb-6">
               <button
                 className={`px-8 py-3 font-medium text-lg rounded-full transition-all duration-300 ${
                   activeTab === "All Mails"
@@ -229,10 +250,10 @@ const Dashboard = () => {
             <div className="relative mb-6">
               <input
                 type="text"
-                placeholder="Search emails..."
+                placeholder="Search emails (min 3 letters)..."
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={handleSearchInput}
               />
               <span className="absolute inset-y-0 right-4 flex items-center text-gray-400">
                 🔍
