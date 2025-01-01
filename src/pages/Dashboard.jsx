@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import Sidebar from "../components/Sidebar";
 import MailList from "../components/MailList";
 import { Button } from "../components/ui/button";
+import Tooltip from "../components/ui/tooltip";
+import { FiArchive, FiEyeOff, FiTrash2 } from "react-icons/fi";
 
 const mockEmails = [
   {
@@ -141,7 +143,6 @@ const Dashboard = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [selectedEmail, setSelectedEmail] = useState(null);
 
-  // Debounce function
   const debounce = (func, delay) => {
     let debounceTimer;
     return function (...args) {
@@ -151,7 +152,6 @@ const Dashboard = () => {
     };
   };
 
-  // Debounced search handler
   const handleSearch = useCallback(
     debounce((term) => {
       setDebouncedSearchTerm(term);
@@ -163,7 +163,6 @@ const Dashboard = () => {
     const term = e.target.value;
     setSearchTerm(term);
 
-    // Trigger debounced handler
     if (term.length >= 3) {
       handleSearch(term);
     } else {
@@ -196,6 +195,22 @@ const Dashboard = () => {
     setSelectedEmail(null);
   };
 
+  const handleArchive = (emailId) => {
+    console.log("Archived email with ID:", emailId);
+  };
+
+  const handleMarkAsUnread = (emailId) => {
+    setEmails((prevEmails) =>
+      prevEmails.map((e) => (e.id === emailId ? { ...e, isUnread: true } : e))
+    );
+    setSelectedEmail(null);
+  };
+
+  const handleDelete = (emailId) => {
+    setEmails((prevEmails) => prevEmails.filter((email) => email.id !== emailId));
+    setSelectedEmail(null);
+  };
+
   return (
     <div className="flex min-h-screen bg-black text-white flex-1 ml-64 p-4">
       <Sidebar />
@@ -207,9 +222,40 @@ const Dashboard = () => {
               ← Back
             </Button>
             <div className="p-6 bg-gray-800 rounded-lg">
-              <h2 className="text-xl font-semibold mb-4">
-                {selectedEmail.subject}
-              </h2>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-semibold">{selectedEmail.subject}</h2>
+                <div className="flex space-x-4">
+                  {/* Archive */}
+                  <Tooltip text="Archive">
+                    <button
+                      className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition"
+                      onClick={() => handleArchive(selectedEmail.id)}
+                    >
+                      <FiArchive className="text-white w-5 h-5" />
+                    </button>
+                  </Tooltip>
+
+                  {/* Mark as Unread */}
+                  <Tooltip text="Mark as Unread">
+                    <button
+                      className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition"
+                      onClick={() => handleMarkAsUnread(selectedEmail.id)}
+                    >
+                      <FiEyeOff className="text-white w-5 h-5" />
+                    </button>
+                  </Tooltip>
+
+                  {/* Delete */}
+                  <Tooltip text="Delete">
+                    <button
+                      className="p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition"
+                      onClick={() => handleDelete(selectedEmail.id)}
+                    >
+                      <FiTrash2 className="text-white w-5 h-5" />
+                    </button>
+                  </Tooltip>
+                </div>
+              </div>
               <div className="text-sm text-gray-400 mb-2">
                 <strong>From:</strong> {selectedEmail.sender}
               </div>
