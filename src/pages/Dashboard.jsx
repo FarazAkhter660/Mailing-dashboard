@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import Sidebar from "../components/Sidebar";
 import MailList from "../components/MailList";
 import { Button } from "../components/ui/button";
@@ -133,6 +133,343 @@ During this time, some services may be unavailable. We apologize for any inconve
 
 Thank you for your understanding.  
 Support Team`,
+  },
+  {
+    id: 9,
+    subject: "Exclusive Offer for the New Year",
+    sender: "offers@example.com",
+    timestamp: "2024-12-17 6:00 PM",
+    isUnread: true,
+    content: `Hi there,  
+
+Celebrate the new year with our exclusive offer just for you!  
+- 50% off on all premium plans  
+- Offer valid till: 2024-12-31  
+
+Don't miss out!  
+
+Best regards,  
+Offers Team`,
+  },
+  {
+    id: 10,
+    subject: "Action Required: Verify Your Account",
+    sender: "noreply@example.com",
+    timestamp: "2024-12-16 11:45 AM",
+    isUnread: false,
+    content: `Dear User,  
+
+Please verify your email address to activate your account.  
+Click the link below to verify:  
+[Verify Now](#)  
+
+Thank you for choosing our service.  
+
+Regards,  
+Support Team`,
+  },
+  {
+    id: 11,
+    subject: "Payment Receipt",
+    sender: "billing@example.com",
+    timestamp: "2024-12-15 2:30 PM",
+    isUnread: true,
+    content: `Dear Customer,  
+
+We have received your payment for the invoice dated 2024-12-01.  
+- Amount Paid: ₹5,000  
+- Transaction ID: TX12345ABC  
+
+Thank you for your timely payment.  
+
+Sincerely,  
+Billing Team`,
+  },
+  {
+    id: 12,
+    subject: "Important Update: Privacy Policy Changes",
+    sender: "legal@example.com",
+    timestamp: "2024-12-14 9:00 AM",
+    isUnread: false,
+    content: `Dear User,  
+
+We have updated our Privacy Policy to better serve you.  
+Please review the updated policy here: [Privacy Policy](#).  
+
+These changes will take effect on 2024-12-31.  
+
+Regards,  
+Legal Team`,
+  },
+  {
+    id: 13,
+    subject: "Thank You for Your Feedback",
+    sender: "feedback@example.com",
+    timestamp: "2024-12-13 4:15 PM",
+    isUnread: true,
+    content: `Hello,  
+
+Thank you for taking the time to share your feedback with us.  
+We appreciate your input and are working hard to improve your experience.  
+
+Have a great day!  
+
+Best regards,  
+Feedback Team`,
+  },
+  {
+    id: 14,
+    subject: "Event Invitation: Tech Conference 2025",
+    sender: "events@example.com",
+    timestamp: "2024-12-12 10:00 AM",
+    isUnread: false,
+    content: `Dear Attendee,  
+
+We are excited to invite you to the Tech Conference 2025!  
+- Date: 2025-01-15  
+- Location: Grand Arena, City Center  
+
+Don't miss this opportunity to connect with industry leaders and innovators.  
+
+Register here: [Register Now](#)  
+
+See you there,  
+Events Team`,
+  },
+  {
+    id: 15,
+    subject: "Your Order Has Been Shipped",
+    sender: "orders@example.com",
+    timestamp: "2024-12-11 8:45 AM",
+    isUnread: true,
+    content: `Dear Customer,  
+
+Your order #ORD123456 has been shipped.  
+- Estimated Delivery Date: 2024-12-20  
+- Tracking ID: TRK987654321  
+
+Thank you for shopping with us!  
+
+Best,  
+Orders Team`,
+  },
+  {
+    id: 16,
+    subject: "Job Opportunity at XYZ Corp",
+    sender: "careers@example.com",
+    timestamp: "2024-12-10 5:30 PM",
+    isUnread: false,
+    content: `Hi,  
+
+We came across your profile and think you'd be a great fit for the following position:  
+- Role: Software Developer  
+- Location: Remote  
+
+Apply here: [Job Application](#)  
+
+Looking forward to hearing from you!  
+
+Best regards,  
+XYZ Careers`,
+  },
+  {
+    id: 17,
+    subject: "Subscription Renewal Reminder",
+    sender: "subscriptions@example.com",
+    timestamp: "2024-12-09 12:00 PM",
+    isUnread: true,
+    content: `Dear User,  
+
+Your subscription will expire on 2024-12-31.  
+Renew now to continue enjoying uninterrupted services.  
+
+[Renew Now](#)  
+
+Thank you for choosing us.  
+
+Sincerely,  
+Subscriptions Team`,
+  },
+  {
+    id: 18,
+    subject: "Congratulations on Your Achievement!",
+    sender: "awards@example.com",
+    timestamp: "2024-12-08 9:30 AM",
+    isUnread: false,
+    content: `Dear [Name],  
+
+Congratulations on receiving the Excellence Award 2024!  
+Your hard work and dedication have been recognized.  
+
+Keep up the fantastic work!  
+
+Cheers,  
+Awards Team`,
+  },
+  {
+    id: 19,
+    subject: "Upcoming Webinar: Boost Your Productivity",
+    sender: "webinars@example.com",
+    timestamp: "2024-12-07 4:00 PM",
+    isUnread: true,
+    content: `Hi,  
+
+Join us for an exclusive webinar on boosting productivity:  
+- Date: 2024-12-29  
+- Time: 3:00 PM  
+
+Register now to secure your spot: [Register Here](#)  
+
+Best regards,  
+Webinars Team`,
+  },
+  {
+    id: 20,
+    subject: "Account Deactivation Warning",
+    sender: "support@example.com",
+    timestamp: "2024-12-06 1:15 PM",
+    isUnread: false,
+    content: `Dear User,  
+
+We noticed that your account has been inactive for 90 days.  
+To keep your account active, log in before 2024-12-31.  
+
+Thank you for staying with us.  
+
+Best regards,  
+Support Team`,
+  },
+  {
+    id: 21,
+    subject: "Exclusive Invite: VIP Member Access",
+    sender: "membership@example.com",
+    timestamp: "2024-12-05 10:00 AM",
+    isUnread: true,
+    content: `Hello,  
+
+You have been selected for exclusive VIP member access!  
+Enjoy premium features and special perks.  
+
+Activate your VIP status here: [Activate Now](#)  
+
+Cheers,  
+Membership Team`,
+  },
+  {
+    id: 22,
+    subject: "Daily Motivation: Quote of the Day",
+    sender: "motivation@example.com",
+    timestamp: "2024-12-04 7:00 AM",
+    isUnread: false,
+    content: `Good Morning,  
+
+Here's your quote for the day:  
+"The only way to do great work is to love what you do." - Steve Jobs  
+
+Stay motivated!  
+
+Warm regards,  
+Motivation Team`,
+  },
+  {
+    id: 23,
+    subject: "Black Friday Sale Ends Soon!",
+    sender: "sales@example.com",
+    timestamp: "2024-12-03 6:45 PM",
+    isUnread: true,
+    content: `Hi there,  
+
+Our Black Friday Sale ends tonight!  
+- Up to 70% off on select items.  
+
+Shop now before it's too late: [Shop Now](#)  
+
+Happy Shopping,  
+Sales Team`,
+  },
+  {
+    id: 24,
+    subject: "New Features Released!",
+    sender: "updates@example.com",
+    timestamp: "2024-12-02 11:30 AM",
+    isUnread: false,
+    content: `Dear User,  
+
+We are thrilled to announce the release of new features:  
+- Dark Mode for improved user experience.  
+- Advanced Analytics Dashboard.  
+
+Update your app to try them out today!  
+
+Regards,  
+Updates Team`,
+  },
+  {
+    id: 25,
+    subject: "Your Subscription Has Been Renewed",
+    sender: "subscriptions@example.com",
+    timestamp: "2024-12-01 9:00 AM",
+    isUnread: true,
+    content: `Dear Customer,  
+
+Your subscription has been successfully renewed.  
+- Plan: Premium  
+- Renewal Date: 2024-12-01  
+- Amount: ₹2,499  
+
+Thank you for choosing our service!  
+
+Best,  
+Subscriptions Team`,
+  },
+  {
+    id: 26,
+    subject: "Invitation to Join Our Beta Program",
+    sender: "beta@example.com",
+    timestamp: "2024-11-30 3:15 PM",
+    isUnread: false,
+    content: `Dear User,  
+
+We are excited to invite you to our beta testing program.  
+Get early access to new features and provide your valuable feedback.  
+
+Join now: [Join Beta Program](#)  
+
+Regards,  
+Beta Team`,
+  },
+  {
+    id: 27,
+    subject: "Welcome to Our Community!",
+    sender: "welcome@example.com",
+    timestamp: "2024-11-29 5:30 PM",
+    isUnread: true,
+    content: `Hi,  
+
+Welcome to our community!  
+We are excited to have you on board. Explore and enjoy all the benefits we have to offer.  
+
+Get started here: [Explore Now](#)  
+
+Warm regards,  
+Community Team`,
+  },
+  {
+    id: 28,
+    subject: "Cyber Monday Deals Are Here!",
+    sender: "deals@example.com",
+    timestamp: "2024-11-28 7:00 AM",
+    isUnread: false,
+    content: `Hello,  
+
+Don't miss out on our Cyber Monday deals:  
+- Discounts up to 80%!  
+- Limited-time offers available now.  
+
+Shop now: [Shop Deals](#)  
+
+Happy Saving,  
+Deals Team`,
   },
 ];
 
@@ -295,7 +632,7 @@ const Dashboard = () => {
             <div className="relative mb-6">
               <input
                 type="text"
-                placeholder="Search emails (min 3 letters)..."
+                placeholder="Search emails..."
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600 text-black"
                 value={searchTerm}
                 onChange={handleSearchInput}
